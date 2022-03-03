@@ -98,10 +98,14 @@ let onVerificationWordC = "Gomosos";
 let onVerificationWordD = "Somos";
 
 function palindromeVerifier(word) {
-   // :)
+let palindomeWord = word.toLowerCase.split("").reverse.join("")
+  if (palindomeWord === word.toLowerCase()){
+
+  console.log(word + "es palindromo")
+  } else {
+  console.log(word + "no es palindromo")
+  }
 }
-
-
 
 /*Dado un objeto que contiene una lista de palabras contar el
 número de letras vocales y consonantes y retornarlo en un arreglo de 2 posiciones.*/
@@ -139,8 +143,13 @@ let wordArrayA = ["hola", "¿" ,"cómo", "estás", "?"];
 let wordArrayB = ["te", "ves" ,"igual", "te", "ves", "igual"];
 
 function arrayJoiner(listA, listB) {
- // :)
+
+  newArray = [...listA, ...listB];
+  return newArray
+
 }
+
+console.log(arrayJoiner(wordArrayA,wordArrayB));
 
 /*Dado un arreglo de strings indicar qué posiciones del arreglo
 son anagramas de una palabra base (recibida como parámetro), retorne las posiciones en un arreglo.*/
@@ -149,7 +158,14 @@ let testWordToExplore = "amar";
 let wordsToVerify = ["amar", "arma", "rana" , "mara", "rama", "roma", "amor", "ramon", "omar"];
 
 function anagramVerifier(wordToExplore, listOfWords) {
-   // :)
+
+  resultado = []
+
+  listOfWords.forEach((palabra, index) => {
+  if(palabra.split("").every(letra => {
+    return wordToExplore.includes (letra);
+    })) result.push(index)
+  })
 }
 
 /*Dado un objeto que contiene 2 arreglos, retornar un objeto con 1
@@ -161,39 +177,53 @@ let testObjMultiContainer = {
 };
 
 function vocalsRemoverFromObject(objectMultiContainer) {
-  // :)
-}
+    
+  let lista = objectMultiContainer.listA.concat(objectMultiContainer.listB); 
 
-console.log(vocalsRemoverFromObject(testObjMultiContainer));
+  lista.forEach(palabra => {
+  let actualWord = []
+  let resultado = []
+    palabra.split('').forEach(letra => {
+    if (
+       letra !== 'a'||
+       letra !== 'e'||
+       letra !== 'i'|| 
+       letra !== 'o'|| 
+       letra !== 'u'
+       ){ actualWord.push(letra);
+          } 
+          
+      }) 
+      resultado.push(actualWord.join(''))    
+  }) 
+  return {resultado}
+}
 
 /*Dado un arreglo de palabras reemplazar la última vocal por una x y retornar dicho arreglo.*/
 
 let someWordsToTest = ["compañeros", "estudiantes", "señores", "amigos", "graduandos", "artistas", "universitarios"];
 
 function lastVocalReplacer(words) {
-    const replacedArray = words.map(word => {
-        let replacedWord;
-        for(let i = word.length - 1; i >= 0; i--) {
-            const letter = word.charAt(i);
-            if(
-                letter === 'a'||
-                letter ==='e'||
-                letter ==='i'|| 
-                letter === 'o'|| 
-                letter ==='u'
-            ) {
-                console.log(word.charAt(i))
-                replacedWord = word.substring(0, i) + 'X' + i === word.length - 1 ? '' : word.substring(i + 1, word.length - 1);
-                break;
-            }
-        }
-        return replacedWord;
-    })
-    return replacedArray;
-    // :)
+  const replacedArr = words.map(word => {
+  let newPal;
+   for(let i = word.length - 1; i >= 0; i--) {
+    const letter = word.charAt(i);
+     if(
+         letter === 'a'||
+         letter === 'e'||
+         letter === 'i'|| 
+         letter === 'o'|| 
+         letter === 'u'
+      ) {
+       //console.log(word.charAt(i))
+      newPal = word.substring (0, i) + 'X' + word.substring(i + 1, word.length );
+      break;
+   }
+  }
+  return newPal;
+})
+ return replacedArr;
 }
-
-console.log(lastVocalReplacer(someWordsToTest));
 
 /*Dada una lista de palabras verificar si alguna de las palabras es la
 versión al revés de alguna de las palabras de una segunda lista,
@@ -204,7 +234,24 @@ let testListA = ["amor", "sabor", "calor","firma", "mara"];
 let testListB = ["roma", "robar", "portar", "arma", "mora"];
 
 function doubleListVerifier(listA, listB) {
-    // :)
+
+
+  let dobleLista = 0;
+  let newB=[];
+
+  for (let i = 0; i < listB.length; i++) {
+   newB[i]=listB[i].split("").reverse().join("");
+  }
+  for (let i = 0; i < listA.length; i++) {
+   for(let j = 0; j < newB.length; j++){
+     if (newB[j] == listA[i]){
+      dobleLista++;
+     }
+    return dobleLista;
+   }
+ }
+  return {dobleLista}
 }
 
+console.log(doubleListVerifier(testListA,testListB));
 
